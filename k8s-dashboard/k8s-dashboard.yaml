@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: k8s-dashboard
+  namespace: argocd  
+spec:
+  destination:
+    namespace: k8s-dashboard
+    server: https://kubernetes.default.svc
+  project: final-exam
+  revisionHistoryLimit: 5
+  syncPolicy:
+    automated:
+      prune: true
+      allowEmpty: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  source:
+    path: k8s-dashboard
+    repoURL: https://github.com/StevenVu82/argocd-example-app.git
